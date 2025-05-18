@@ -37,6 +37,8 @@ public class Consumer extends User implements Booking {
 
 	}
 
+	// 只展示 cancelTicket 关键匹配修改
+
 	@Override
 	public void cancelTicket(int amount, Event event, boolean isVip) {
 		List<String> lines = new ArrayList<>();
@@ -56,8 +58,7 @@ public class Consumer extends User implements Booking {
 		for (int i = 0; i < lines.size(); i++) {
 			String line = lines.get(i);
 			if (line.startsWith("Consumer Info: " + getName() + ", " + getID() + ", " + getPhone())
-					&& lines.get(i + 1).startsWith("Event Info: " + event.getEventName() + ", " + event.getEventDate()
-							+ ", " + event.getEventLocation())
+					&& lines.get(i + 1).contains(event.getEventName()) && lines.get(i + 1).contains(event.getArtist())
 					&& lines.get(i + 3).startsWith(vipString)) {
 
 				int recordedAmount = Integer.parseInt(lines.get(i + 2).split(": ")[1]);

@@ -49,8 +49,8 @@ public class Vip extends Consumer {
 		for (int i = 0; i < lines.size(); i++) {
 			String line = lines.get(i);
 			if (line.startsWith("Consumer Info: " + getName() + ", " + getID() + ", " + getPhone())
-					&& i + 3 < lines.size() && lines.get(i + 1).startsWith("Event Info: " + event.getEventName() + ", "
-							+ event.getEventDate() + ", " + event.getEventLocation())) {
+					&& i + 3 < lines.size() && lines.get(i + 1).contains(event.getEventName())
+					&& lines.get(i + 1).contains(event.getArtist())) {
 
 				// Check both VIP and regular bookings
 				String vipLine = lines.get(i + 3);
@@ -70,8 +70,6 @@ public class Vip extends Consumer {
 					}
 				}
 			}
-
-			// 加入保留的行
 			filteredLines.add(line);
 		}
 

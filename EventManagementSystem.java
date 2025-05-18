@@ -200,7 +200,9 @@ public class EventManagementSystem extends JFrame {
 		// Create edit panel with all editable fields
 		JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
 		JTextField txtName = new JTextField(oldEvent.getEventName());
+		txtName.setEditable(false); // 禁止修改
 		JTextField txtArtist = new JTextField(oldEvent.getArtist());
+		txtArtist.setEditable(false); // 禁止修改
 		JTextField txtDate = new JTextField(oldEvent.getEventDate());
 		JTextField txtLocation = new JTextField(oldEvent.getEventLocation());
 		JTextField txtRegularTickets = new JTextField(String.valueOf(oldEvent.getEventAmount()));
@@ -417,6 +419,7 @@ public class EventManagementSystem extends JFrame {
 
 			// 刷新事件信息
 			eventInfo.setText(getEventInfoText(event));
+			refreshUI("Browse");
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "Invalid number entered.", "Error", JOptionPane.ERROR_MESSAGE);
 		} catch (UnauthorizedAccessException e) {
@@ -461,6 +464,7 @@ public class EventManagementSystem extends JFrame {
 
 				// 刷新UI
 				refreshUI("Cancel");
+				refreshUI("Browse");
 
 				JOptionPane.showMessageDialog(this, "Successfully canceled " + amount + " tickets.", "Success",
 						JOptionPane.INFORMATION_MESSAGE);
@@ -473,6 +477,7 @@ public class EventManagementSystem extends JFrame {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
 		}
+
 	}
 
 	private void updateEventFile(Event updatedEvent) {
